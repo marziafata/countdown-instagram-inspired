@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown Instagram Inspired</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="box">
+            <!-- inserisci un testo identificativo per il conto alla rovescia -->
+            <h1>halloween</h1>
+            <div class="countdown">
+                <div class="number" id="day1"></div>
+                <div class="number" id="day2"></div>
+                <div>:</div>
+                <div class="number" id="hour1"></div>
+                <div class="number" id="hour2"></div>
+                <div>:</div>
+                <div class="number" id="minute1"></div>
+                <div class="number" id="minute2"></div>
+
+                <!-------------------------------------------------------------------------------
+                    ATTENZIONE! Se si vogliono aggiungere i secondi, bisognerà adeguare il css!
+                -------------------------------------------------------------------------------->
+
+                <!-- div aggiuntivi per eventuale aggiunta secondi
+                <div>:</div>
+                <div class="number" id="seconds1"></div>
+                <div class="number" id="seconds2"></div> -->
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        //definisco la data finale con new Date => si possono inserire massimo 7 numeri che identificano in quest'ordine anno, mese, giorno, ore, minuti, secondi, millisecondi (separati dalla virgola)
+        //getTime restituisce la data in questione in millisecondi a partire dal 01/01/1970
+        //qui tra le due parentesi puoi inserire la data finale che preferisci
+        var dataFine = new Date(2020, 09, 30, 23, 59).getTime();
+
+        function countdown() {
+            //imposto la data corrente come di inizio del countdown (in millisecondi)
+            //se hai la necessità qui puoi inserire una data specifica, seguendo le indicazioni precedenti
+            var dataInizio = new Date().getTime();
+            //definisco periodo di tempo del countdown (sempre in millisecondi)
+            var differenza = dataFine - dataInizio;
+
+                //definisco le unità di tempo in millisecondi
+                //es. Il numero totale di secondi in un minuto è 60 => se voglioamo ottenere i millisecondi dobbiamo moltiplicarlo per 1000
+                var secondo = 1000;
+                var minuto = secondo * 60;
+                var ora = minuto * 60;
+                var giorno = ora * 24;
+
+                //tutte le variabili definite sono in millisecondi!
+                //periodo di riferimento / giorno (scartando il resto e tenendo solo la parte intera) = giorni che mancano allo scadere
+                var giorniMancanti = Math.floor(differenza / (giorno)).toString();
+                //periodo di riferimento % giorno = scarta la parte intera e mi restituisce solo la parte decimane (le ore) / un'ora = numero di ore mancanti
+                var oreMancanti = Math.floor((differenza % (giorno)) / (ora)).toString();
+                //periodo di riferimento % ora = scarta la parte intera e mi restituisce solo la parte decimane (i minuti) / un minuto = numero di minuti mancanti
+                var minutiMancanti = Math.floor((differenza % (ora)) / (minuto)).toString();
+                //decommentare la prossima riga se si vogliono aggiungere i secondi
+                // var secondiMancanti = Math.floor((differenza % (minuto)) / (secondo)).toString();
+
+                //per ogni valore estraggo separatamente le 2 cifre che lo compongono
+                var giorniCifra1 = giorniMancanti.charAt(0);
+                var giorniCifra2 = giorniMancanti.charAt(1);
+
+                var oreCifra1 = oreMancanti.charAt(0);
+                var oreCifra2 = oreMancanti.charAt(1);
+
+                var minutiCifra1 = minutiMancanti.charAt(0);
+                var minutiCifra2 = minutiMancanti.charAt(1);
+
+                // var secondiCifra1 = secondiMancanti.charAt(0);
+                // var secondiCifra2 = secondiMancanti.charAt(1);
+
+                //e li inserisco negli spazi predisposti
+                // se il numero del giorno è minore di 10
+                if (giorniMancanti < 10) {
+                    //inserisco "0" nello spazio della prima cifra
+                    document.getElementById('day1').innerText = "0";
+                    //e l'unica cifra esistente nello spazio della seconda cifra
+                    document.getElementById('day2').innerText = giorniMancanti;
+                } else {
+                    //altrimenti inserisco le cifre nei propri div corrispondenti
+                    document.getElementById('day1').innerText = giorniCifra1;
+                    document.getElementById('day2').innerText = giorniCifra2;
+                }
+                //seguo la stessa logica per ore, minuti ed eventualmente secondi
+                if (oreMancanti < 10) {
+                    document.getElementById('hour1').innerText = "0";
+                    document.getElementById('hour2').innerText = oreMancanti;
+                } else {
+                    document.getElementById('hour1').innerText = oreCifra1;
+                    document.getElementById('hour2').innerText = oreCifra2;
+                }
+
+                if (minutiMancanti < 10) {
+                    document.getElementById('minute1').innerText = "0";
+                    document.getElementById('minute2').innerText = minutiMancanti;
+                } else {
+                    document.getElementById('minute1').innerText = minutiCifra1;
+                    document.getElementById('minute2').innerText = minutiCifra2;
+                }
+
+                // if (secondiMancanti < 10) {
+                //     document.getElementById('seconds1').innerText = "0";
+                //     document.getElementById('seconds2').innerText = secondiMancanti;
+                // } else {
+                //     document.getElementById('seconds1').innerText = secondiCifra1;
+                //     document.getElementById('seconds2').innerText = secondiCifra2;
+                // }
+        }
+        //imposto la ripetizione della funzione ogni secondo
+        //set interval continua a funzionare finchè non viene eventualmente fermato da clearInterval ()
+        setInterval(function() {
+            countdown();
+        },1000)
+    </script>
+</body>
+</html>
