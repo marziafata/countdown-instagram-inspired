@@ -23,6 +23,8 @@ body {
     height: 209px;
     background: rgb(189,49,218);
     background: linear-gradient(145deg, rgba(189,49,218,1) 30%, rgba(94,162,235,1) 100%);
+    /********************************* versione verde ****************************************/
+    /* background: linear-gradient(145deg, rgba(109,191,92,1) 30%, rgba(64,185,224,1) 100%); */
     border-radius: 15px;
     padding: 30px;
     box-shadow: 3px 2px 11px rgba(0,0,0,0.5);
@@ -56,6 +58,8 @@ body {
 .countdown div.number {
     background-color: rgba(255,255,255,0.5);
     color: #760186;
+    /* versione verde */
+    /* color: #609151; */
     width: 36px;
     height: 61px;
     border-radius: 5px;
